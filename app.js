@@ -1,79 +1,128 @@
 var util = require("util");
 var timetable = require("./lib/timetable.js");
 var ical = require("./lib/ical.js");
+var request = require("request");
+var express = require("express");
 
-var DAYS = {
-  "sunday": 0,
-  "monday": 1,
-  "tuesday": 2,
-  "wednesday": 3,
-  "thursday": 4,
-  "friday": 5,
-  "saturday": 6
-};
-
-function pad(num) {
-  return num < 10 ? "0" + num : num;
-}
-
-Date.prototype.toICAL = function() {
-  return this.getFullYear() +
-    pad(this.getMonth() + 1) +
-    pad(this.getDate()) +
-    "T" +
-    pad(this.getHours()) +
-    pad(this.getMinutes()) +
-    pad(this.getSeconds());
-};
-
-timetable.getTimetable(null, function(err, timetable) {
-
-  var now = new Date(),
-    today = now.getDay(),
-    calendar = new ical.Calendar();
-
-  for(var i = 0, il = timetable.length; i < il; i++) {
-
-    var day = timetable[i],
-      periods = day.periods,
-      dayVal = DAYS[day.name.toLowerCase()],
-      dateTime = new Date();
-
-    // set the date of the timetable day to be relative to the
-    // current day so the dates are for this week
-    dateTime.setDate(dateTime.getDate() - (today - dayVal));
-
-    // no need for setting seconds
-    dateTime.setSeconds(0);
-
-    for(var j = 0, jl = periods.length; j < jl; j++) {
-      var period = periods[j],
-        event = new ical.Event();
-
-      // set some attributes for each period
-      // reuse the date object and update just the times
-      dateTime.setHours(period.start.hours);
-      dateTime.setMinutes(period.start.mins);
-
-      event.setAttribute("DTSTART", dateTime.toICAL());
-
-      dateTime.setHours(period.end.hours);
-      dateTime.setMinutes(period.end.mins);
-
-      event.setAttribute("DTEND", dateTime.toICAL());
-
-      event.setAttribute("SUMMARY", period.name);
-      event.setAttribute("DESCRIPTION", period.lecturers.join(";"));
-      event.setAttribute("CREATED", now.toICAL());
-      event.setAttribute("LAST-MODIFIED", now.toICAL());
-      event.setAttribute("LOCATION", period.room);
+var app = express();
 
 
-      calendar.add(event);
+
+request("http://timetable.itcarlow.ie/js/filter.js", function(err, res, body) {
+  var regex = /(\w+)array\[(\d+)\] \[(\d+)\] = \"(.+?)\"/g,
+    match;
+
+  function next() {
+    return regex.exec(body);
+  }
+  var depts = [],
+    deptObj = {},
+    modules = [],
+    moduleObj = {},
+    courses = [];
+
+  while((match = next()) !== null) {
+    var type = match[1],
+      index = match[2],
+      item = match[3];
+
+
+    switch(type) {
+      case "module":
+        var name = match[4],
+          dept = next()[4],
+          id = next()[4],
+          module = {
+            name: name,
+            dept: dept,
+            id: id
+          };
+
+        moduleObj[id] = module;
+        modules.push(module);
+
+        break;
+      case "staff":
+        break;
+      case "zone":
+        break;
+      case "dept":
+        var name = match[4],
+          id = next()[4];
+
+        deptObj[id] = name;
+        depts.push({
+          name: name,
+          id: id,
+          modules: []
+        });
+
+        break;
+      case "studset":
+        var name = match[4],
+          dept = next()[4],
+          id = next()[4],
+          course = {
+            name: name,
+            dept: dept,
+            id: id
+          };
+        courses.push(course);
+
+        break;
+      case "room":
+        break;
+      case "roombydept":
+        break;
+      case "prog":
+        break;
+      default:
+        console.log(type);
+        break;
     }
 
   }
+  // console.log(courses);
+});
 
-  console.log(calendar.toString());
+
+app.configure(function () {
+
+    app.set('views', __dirname + '/views');
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({
+      store: sessionStore,
+      secret: 'secret',
+      key: 'express.sid'
+    }));
+
+
+    app.use(express.methodOverride());
+    app.use(express.static(__dirname + '/static'));
+});
+
+
+
+app.get("/timetable.:format", function(req, res) {
+
+  timetable.getTimetable("KCSENB_4A%20Set%0D%0A", function(err, timetable) {
+
+    switch(req.params.format) {
+      case "json":
+
+        res.json(timetable);
+        break;
+      case "ics":
+      case "ical":
+      default:
+        res.set('Content-Type', 'text/calendar');
+        res.send(timetable.toICAL().toString());
+        break;
+    }
+
+  });
 
 });
+
+app.listen(80);
