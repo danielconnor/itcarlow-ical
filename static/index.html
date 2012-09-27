@@ -16,7 +16,7 @@
       your timetable below and click go. This will start a download of the timetable.
     </p>
 
-    <form action="/timetable.ics" class="form-horizontal">
+    <form id="select-form" action="/timetable.ics" class="form-horizontal">
       <legend>Select your timetable</legend>
       <div class="control-group">
         <label class="control-label" for="department">Department</label>
@@ -48,8 +48,13 @@
           <button class="btn btn-primary" type="submit">Submit</button>
         </div>
       </div>
-
     </form>
+
+    <div>
+      <p>You can click these urls to download the calendar files, or copy them to add them as calendars on google calendar</p>
+      <ul id="urls">
+      </ul>
+    </div>
 
     <div class="large">OR</div>
     <p>Go to <a href="http://timetable.itcarlow.ie">timetable.itcarlow.ie</a> and select your timetable. Copy the url and paste it down below </p>
@@ -91,7 +96,14 @@
 
       var departmentsEl = $("#department").on("change", updateItems),
         typeEl = $("[name=type]").on("change", updateItems),
-        itemsEl = $("#items");
+        itemsEl = $("#items"),
+        urlEl = $("#urls"),
+        selectForm = $("#select-form").on("submit", function(e) {
+          var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + typeEl.val();
+          $("<li/>").append($("<a/>").attr("href", url).text(url)).appendTo(urlEl);
+
+          e.preventDefault();
+        });
 
       // populate departments first
       // they will always be populated so we won't have to change them around again

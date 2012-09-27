@@ -1,21 +1,25 @@
 {
-  "name" : "itcarlow-ical",
+  "name": "itcarlow-ical",
   "subdomain": "itc",
-  "description" : "Parses itcarlow's timetable and exports in ical format",
-  "keywords" : [ "itcarlow", "timetable", "icalendar" ],
-  "version": "0.0.1",
-  "preferGlobal" : true,
-  "author" : "Daniel Connor <danielconnr@gmail.com>",
+  "description": "Parses itcarlow's timetable and exports in ical format",
+  "keywords": [
+    "itcarlow",
+    "timetable",
+    "icalendar"
+  ],
+  "version": "0.0.1-7",
+  "preferGlobal": true,
+  "author": "Daniel Connor <danielconnr@gmail.com>",
   "scripts": {
-    "start" : "./app.js"
+    "start": "./app.js"
   },
-  "dependencies" :{
-    "request" : "*",
-    "jsdom" : "*",
+  "dependencies": {
+    "request": "*",
+    "jsdom": "*",
     "express": "*",
     "connect": "*"
   },
-  "engines" : {
-    "node" : ">=0.4"
+  "engines": {
+    "node": ">=0.4"
   }
 }
