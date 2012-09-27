@@ -1,13 +1,13 @@
 {
   "name" : "itcarlow-ical",
+  "subdomain": "itc",
   "description" : "Parses itcarlow's timetable and exports in ical format",
-  "keywords" : [ "itcarlow", "timetable", "icalendat" ],
+  "keywords" : [ "itcarlow", "timetable", "icalendar" ],
   "version": "0.0.1",
   "preferGlobal" : true,
   "author" : "Daniel Connor <danielconnr@gmail.com>",
-  "main" : "./fh-fhc.js",
-  "bin" : {
-    "fhc": "./bin/fhc.js"
+  "scripts": {
+    "start" : "./app.js"
   },
   "dependencies" :{
     "request" : "*",
