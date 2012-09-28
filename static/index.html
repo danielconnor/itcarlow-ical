@@ -11,9 +11,10 @@
   <div class="content">
     <h1>iCal exporter</h1>
     <p>
-      Use this service to convert your timetables to iCal format. The iCal format is supported by many different
-      applications so you can import it into your prefered calendar application. Just paste the url to
-      your timetable below and click go. This will start a download of the timetable.
+      Use this service to convert your timetables to iCal format. The iCalendar format is supported by the majority of
+      calendar applications so you can import into your favourite one. Either select your timetable from the options
+      or paste the url to the timetable. Then you can either download the file, or use the generated url to import into
+      an online application (This allows it to update automatically).
     </p>
 
     <form id="select-form" action="/timetable.ics" class="form-horizontal">
@@ -57,7 +58,7 @@
     <form action="/timetable.ics" method="GET">
       <div class="input-append">
         <input class="input-xlarge" type="text" name="url" placeholder="Enter the url to the timetable...">
-        <button class="btn btn-primary" type="submit">Submit</button>
+        <button class="btn btn-primary" type="submit">Download</button>
       </div>
     </form>
 
@@ -84,18 +85,23 @@
           var type = typeList[i];
           $("<option />").val(type.id).text(type.name).appendTo(fragment);
         }
+        itemsEl.html("").append(fragment);
+
+        updateLink();
+      }
+
+      function updateLink() {
+        var selectedType = typeEl.filter(":checked").val();
 
         // clear the current items and append the new fragment,
         // which contains the new items
-        itemsEl.html("").append(fragment);
-        var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + typeEl.val();
-
+        var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + selectedType;
         calendarLink.attr("href", url).text(url);
       }
 
       var departmentsEl = $("#department").on("change", updateItems),
         typeEl = $("[name=type]").on("change", updateItems),
-        itemsEl = $("#items"),
+        itemsEl = $("#items").on("change", updateLink),
         urlEl = $("#urls"),
         calendarLink = $("#calendar-link");
 
