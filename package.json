@@ -7,7 +7,7 @@
     "timetable",
     "icalendar"
   ],
-  "version": "0.0.1-18",
+  "version": "0.1.0",
   "preferGlobal": true,
   "author": "Daniel Connor <danielconnr@gmail.com>",
   "scripts": {
