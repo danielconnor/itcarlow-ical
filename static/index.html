@@ -45,16 +45,12 @@
 
       <div class="control-group">
         <div class="controls">
-          <button class="btn btn-primary" type="submit">Submit</button>
+          <button class="btn btn-primary" type="submit">Download</button>
         </div>
       </div>
     </form>
 
-    <div>
-      <p>You can click these urls to download the calendar files, or copy them to add them as calendars on google calendar</p>
-      <ul id="urls">
-      </ul>
-    </div>
+    <p>Use this link to add to google calendar:<a id="calendar-link"></a></p>
 
     <div class="large">OR</div>
     <p>Go to <a href="http://timetable.itcarlow.ie">timetable.itcarlow.ie</a> and select your timetable. Copy the url and paste it down below </p>
@@ -92,18 +88,16 @@
         // clear the current items and append the new fragment,
         // which contains the new items
         itemsEl.html("").append(fragment);
+        var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + typeEl.val();
+
+        calendarLink.attr("href", url).text(url);
       }
 
       var departmentsEl = $("#department").on("change", updateItems),
         typeEl = $("[name=type]").on("change", updateItems),
         itemsEl = $("#items"),
         urlEl = $("#urls"),
-        selectForm = $("#select-form").on("submit", function(e) {
-          var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + typeEl.val();
-          $("<li/>").append($("<a/>").attr("href", url).text(url)).appendTo(urlEl);
-
-          e.preventDefault();
-        });
+        calendarLink = $("#calendar-link");
 
       // populate departments first
       // they will always be populated so we won't have to change them around again

@@ -19,7 +19,6 @@ app.configure(function () {
 app.get("/timetable.:format", function(req, res) {
   var query = req.query,
     url;
-
   if(query.url) {
     url = query.url;
   }
@@ -44,7 +43,7 @@ app.get("/timetable.:format", function(req, res) {
       case "ics":
       case "ical":
       default:
-        res.set('Content-Type', 'text/calendar');
+        res.setHeader('Content-Type', 'text/calendar');
         res.send(timetable.toICAL().toString());
         break;
     }
