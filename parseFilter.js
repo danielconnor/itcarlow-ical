@@ -103,7 +103,18 @@ require("fs").readFile("./filter.js", function(err, data) {
         console.log(type);
         break;
     }
-
   }
+
+  function itemSorter(a, b) {
+    return a.name.localeCompare(b.name);
+  }
+
+  for(var deptID in deptObj) {
+    var dept = deptObj[deptID];
+
+    dept.staff.sort(itemSorter);
+    dept.courses.sort(itemSorter);
+  }
+
   console.log("var depts = " + JSON.stringify(deptObj) + ";");
 });

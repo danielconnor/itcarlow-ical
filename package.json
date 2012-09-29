@@ -7,17 +7,17 @@
     "timetable",
     "icalendar"
   ],
-  "version": "0.2.0",
+  "version": "0.2.0-1",
   "preferGlobal": true,
   "author": "Daniel Connor <danielconnr@gmail.com>",
   "scripts": {
     "start": "./app.js"
   },
   "dependencies": {
-    "request": "2.*",
-    "jsdom": "0.2.*",
-    "express": "3.0.*",
-    "connect": "2.4.*"
+    "request": "*",
+    "jsdom": "*",
+    "express": "*",
+    "connect": "*"
   },
   "engines": {
     "node": ">=0.4"

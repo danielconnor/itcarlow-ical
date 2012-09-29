@@ -68,16 +68,20 @@
     </p>
   </div>
 
-  <script src="js/zepto.min.js"></script>
+  <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/depts.js"></script>
 
   <script>
     (function() {
+        var selectedDept,
+          selectedType;
+
 
       function updateItems() {
-        var selectedDept = depts[departmentsEl.val()],
-          selectedType = typeEl.filter(":checked").val(),
-          typeList = selectedDept[selectedType],
+        selectedDept = depts[departmentsEl.val()];
+        selectedType = typeEl.filter(":checked").val();
+
+        var typeList = selectedDept[selectedType],
           // create a document fragment for faster insertion
           fragment = document.createDocumentFragment();
 
@@ -91,8 +95,6 @@
       }
 
       function updateLink() {
-        var selectedType = typeEl.filter(":checked").val();
-
         // clear the current items and append the new fragment,
         // which contains the new items
         var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + selectedType;
