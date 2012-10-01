@@ -1,6 +1,8 @@
-
+body {
+  background: url(../img/bgnoise_lg.png)
+}
 .content {
-  width: 40em;
+  width: 50em;
   margin: 0 auto;
 }
 .large {
