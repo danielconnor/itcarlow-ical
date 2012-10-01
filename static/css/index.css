@@ -1,6 +1,6 @@
 
 .content, footer {
-  padding: 0 20%;
+  /*padding: 0 20%;*/
 }
 .large {
   text-align: center;
@@ -8,8 +8,28 @@
   margin: 1em 0;
 }
 
+.steps {
+  counter-reset: listNumbering;
+  list-style: none;
+}
 
-.step {
-  width: 100%;
-  height: 100%;
+.steps .step {
+  font-size: 1em;
+  counter-increment: listNumbering;
+}
+.steps h2 {
+  display: inline-block;
+}
+.steps div {
+  margin: 1em 0 1em 3em;
+}
+.step img {
+  margin: 1em;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}
+
+.steps .step:before {
+  content: counter(listNumbering) ' - ';
+  font-size: 30px;
+  font-weight: bold;
 }
