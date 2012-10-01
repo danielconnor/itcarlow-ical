@@ -1,6 +1,4 @@
-body {
-  background: url(../img/bgnoise_lg.png)
-}
+
 .content, footer {
   padding: 0 20%;
 }
@@ -8,4 +6,10 @@ body {
   text-align: center;
   font-size: 2em;
   margin: 1em 0;
+}
+
+
+.step {
+  width: 100%;
+  height: 100%;
 }

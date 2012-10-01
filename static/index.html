@@ -11,124 +11,100 @@
   <div class="content">
     <h1>iCalendar exporter</h1>
     <p>
-      Use this service to convert your timetables to iCalendar format. The iCalendar format is supported by the majority of calendar applications so you can import into your favourite one. Either <a href="#select">select your timetable from the lists</a>
-      or <a href="#url">paste the url to the timetable</a>. Then you can either download the file, or use the generated url to import into
-      an online application such as Google calendar (This allows it to update automatically).
+      This service allows you to convert IT Carlow timetables to the iCalendar format.
+
+      This means you can add your timetables to your android or apple smartphone through Google Calendar.
     </p>
 
-    <form id="select-form" action="/timetable.ics" class="form-horizontal">
-      <legend id="select">Select your timetable</legend>
+    <div class="step" id="step1">
+      <h2>Select your timetable</h2>
+      <form>
 
-      <div class="control-group">
-        <div class="controls">
-          <label class="checkbox">
-            <input name="type" type="radio" value="courses" checked="checked"> Students
-          </label>
-          <label class="checkbox">
-            <input name="type" type="radio" value="staff"> Staff
-          </label>
-        </div>
+      </form>
+    </div>
+
+    <div class="step" id="step2">
+      <h2>Add to Google Calendar</h2>
+
+    </div>
+
+    <div class="step" id="step3">
+      <h2>Get it on your device</h2>
+
+    </div>
+
+
+
+
+      <div class="tab-pane" id="instructions">
+        <h2>iPhone</h2>
+        <ol>
+          <li>
+            Copy the link from above.
+          </li>
+          <li>
+            Go to <a href="https://google.com/calendar/">Google Calendar</a>
+          </li>
+          <li>
+            On the left hand column of the page, click the arrow beside "Other Calendars", then "Add by URL"
+          </li>
+          <li>
+            Paste the link from step one into the input and click "Add Calendar".
+          </li>
+          <li>
+            Once the timetable has successfully been imported it should appear on your calendar
+          </li>
+          <li>
+            To import the calendar on your iPhone/iPod go to <a href="https://www.google.com/calendar/iphoneselect">https://www.google.com/calendar/iphoneselect</a> and select the calendar you imported. Then click "Save"
+          </li>
+          <li>
+            Go to your iPhone/iPod and open the iCal app. Your calendar should appear once you click the reload button.
+          </li>
+        </ol>
+        <h2>Android</h2>
+        <ol>
+          <li>
+            Copy the link from above.
+          </li>
+          <li>
+            Go to <a href="https://google.com/calendar/">Google Calendar</a>
+          </li>
+          <li>
+            On the left hand column of the page, click the arrow beside "Other Calendars", then "Add by URL".
+          </li>
+          <li>
+            Paste the link from step one into the input and click "Add Calendar".
+          </li>
+          <li>
+            Once the timetable has successfully been imported it should appear on your calendar.
+          </li>
+          <li>
+            The timetable should also appear on the calendar app on your phone, although you may need to
+            close and reopen it to update.
+          </li>
+        </ol>
+
       </div>
-
-      <div class="control-group">
-        <label class="control-label" for="department">Department</label>
-        <div class="controls">
-          <select id="department" class="input-xlarge"></select>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <label class="control-label" for="items">Timetable</label>
-        <div class="controls">
-          <select id="items" class="input-xlarge" name="item"></select>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <div class="controls">
-          <button class="btn btn-primary" type="submit">Download</button>
-        </div>
-      </div>
-    </form>
-
-    <p>Use this link to add to google calendar: <a id="select-calendar-link"></a></p>
-
-    <div class="large">OR</div>
-    <p id="url">Go to <a href="http://timetable.itcarlow.ie">timetable.itcarlow.ie</a> and select your timetable. Copy the url and paste it down below </p>
-    <form action="/timetable.ics" method="GET">
-      <div class="input-append">
-        <input id="timetable-url" class="input-xlarge" type="text" name="url" placeholder="Enter the url to the timetable...">
-        <button class="btn btn-primary" type="submit">Download</button>
-      </div>
-    </form>
-
-    <p>Use this link to add to google calendar: <a id="url-calendar-link"></a></p>
-
-    <h2>iPhone</h2>
-    <ol>
-      <li>
-        Copy the link from above.
-      </li>
-      <li>
-        Go to <a href="https://google.com/calendar/">Google Calendar</a>
-      </li>
-      <li>
-        On the left hand column of the page, click the arrow beside "Other Calendars", then "Add by URL"
-      </li>
-      <li>
-        Paste the link from step one into the input and click "Add Calendar".
-      </li>
-      <li>
-        Once the timetable has successfully been imported it should appear on your calendar
-      </li>
-      <li>
-        To import the calendar on your iPhone/iPod go to <a href="https://www.google.com/calendar/iphoneselect">https://www.google.com/calendar/iphoneselect</a> and select the calendar you imported. Then click "Save"
-      </li>
-      <li>
-        Go to your iPhone/iPod and open the iCal app. Your calendar should appear once you click the reload button.
-      </li>
-    </ol>
-    <h2>Android</h2>
-    <ol>
-      <li>
-        Copy the link from above.
-      </li>
-      <li>
-        Go to <a href="https://google.com/calendar/">Google Calendar</a>
-      </li>
-      <li>
-        On the left hand column of the page, click the arrow beside "Other Calendars", then "Add by URL".
-      </li>
-      <li>
-        Paste the link from step one into the input and click "Add Calendar".
-      </li>
-      <li>
-        Once the timetable has successfully been imported it should appear on your calendar.
-      </li>
-      <li>
-        The timetable should also appear on the calendar app on your phone, although you may need to
-        close and reopen it to update.
-      </li>
-    </ol>
+    </div>
 
   </div>
 
 
   <footer>
-    <p>
-      Here's a bookmarklet that you can run on the page to generate the .ics file.
-      <a href='javascript:(function(){function a(a,b){var c=function(){};c.prototype=b.prototype;a.super_=b;a.prototype=new c;a.prototype.constructor=a}function b(a,b){this.type=a;this.attributes=b||{};this.people=[];this.children=[]}function c(){b.call(this,"VCALENDAR",{VERSION:"2.0",CALSCALE:"GREGORIAN"})}function d(){b.call(this,"VEVENT")}function f(a){var b=a.split(":");return{hours:parseInt(b[0],10),mins:parseInt(b[1],10)}}function g(a){return a.split(";")}function h(a){return a<10?"0"+a:a}function j(a,b){this.name=a;this.periods=b||[]}function k(a){this.url=a||"";this.days=[]}function l(a,b){var c=a.getElementsByTagName("p");var d=new k(b);for(var e=0,f=c.length;e<f;e++){var g=c[e],h=new j(g.textContent.trim()),l=g.nextSibling.nextSibling.getElementsByTagName("tr");for(var m=1,n=l.length;m<n;m++){var o=l[m].children,p={};for(var q=0,r=i.length;q<r;q++){var s=i[q],t=o[q];p[s.name]=t?typeof s.parse==="function"?s.parse(t.textContent):t.textContent:""}h.addPeriod(p)}d.addDay(h)}return d}b.prototype.setAttribute=function(a,b){this.attributes[a]=b};b.prototype.add=function(a){if(a instanceof b){this.children.push(a)}};b.prototype.toString=function(){var a="",b=this.attributes,c=Object.keys(b),d=this.children;for(var e=0,f=c.length;e<f;e++){var g=c[e],h=b[g];if(typeof h!=="string"&&h.length!==undefined){}else{a+=g.toUpperCase()+":"+b[g]+"\n"}}for(e=0,f=d.length;e<f;e++){a+=d[e]}return"BEGIN:"+this.type.toUpperCase()+"\n"+a+"END:"+this.type.toUpperCase()+"\n"};a(c,b);a(d,b);var e={sunday:0,monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6};var i=[{name:"name"},{name:"module"},{name:"type"},{name:"start",parse:f},{name:"end",parse:f},{name:"duration"},{name:"weeks"},{name:"room"},{name:"lecturers",parse:g},{name:"groups",parse:g}];j.prototype.addPeriod=function(a){this.periods.push(a)};k.prototype.addDay=function(a){this.days.push(a)};Date.prototype.toICAL=function(){return this.getFullYear()+h(this.getMonth()+1)+h(this.getDate())+"T"+h(this.getHours())+h(this.getMinutes())+h(this.getSeconds())};k.prototype.toICAL=function(){var a=this.days,b=new Date,f=b.getDay(),g=new c;for(var h=0,i=a.length;h<i;h++){var j=a[h],k=j.periods,l=e[j.name.toLowerCase()],m=new Date;m.setDate(m.getDate()-(f-l));m.setSeconds(0);for(var n=0,o=k.length;n<o;n++){var p=k[n],q=new d;m.setHours(p.start.hours);m.setMinutes(p.start.mins);q.setAttribute("DTSTART",m.toICAL());m.setHours(p.end.hours);m.setMinutes(p.end.mins);q.setAttribute("DTEND",m.toICAL());q.setAttribute("SUMMARY",p.name);q.setAttribute("DESCRIPTION",p.lecturers.join(";"));q.setAttribute("CREATED",b.toICAL());q.setAttribute("LAST-MODIFIED",b.toICAL());q.setAttribute("LOCATION",p.room);g.add(q)}}return g};(function(){function c(a){var c=l(a,b),d="data:text/calendar,"+encodeURIComponent(c.toICAL().toString());a.location.href=d}var a=document.location.href,b=a.replace(/individual/g,"textspreadsheet");console.log(b);if(a===b){c(window.document)}else{var d=document.createElement("iframe");d.onload=function(){c(d.contentDocument||d.contentWindow.document)};d.style.display="none";d.src=b;document.body.appendChild(d)}})()})();'>drag me to your bookmarklets</a>
-    </p>
   </footer>
 
 
-  <script src="js/jquery-1.8.2.min.js"></script>
   <script src="js/depts.js"></script>
+  <script src="js/jquery-1.8.2.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 
   <script>
     (function() {
         var selectedDept,
           selectedType;
+
+
+
 
 
       function updateItems() {
@@ -143,30 +119,27 @@
           var type = typeList[i];
           $("<option />").val(type.id).text(type.name).appendTo(fragment);
         }
+
         itemsEl.html("").append(fragment);
 
-        updateLink();
+        updateSelectLink();
       }
 
-      function updateLink() {
-        // clear the current items and append the new fragment,
-        // which contains the new items
+      function updateSelectLink() {
         var url = document.location.href + "timetable.ics?item=" + itemsEl.val() + "&type=" + selectedType;
-        selectCalendarLink.attr("href", url).text(url);
+        calendarLink.val(url);
       }
-
-      function updateLink2() {
-        var url = document.location.href + "timetable.ics?url=" + timetableURL.val();
-        urlCalendarLink.attr("href", url).text(url);
+      function updateURLLink() {
+        var url = document.location.href + "timetable.ics?url=" + urlCalendarInput.val();
+        calendarLink.val(url);
       }
 
       var departmentsEl = $("#department").on("change", updateItems),
         typeEl = $("[name=type]").on("change", updateItems),
-        itemsEl = $("#items").on("change", updateLink),
+        itemsEl = $("#items").on("change", updateSelectLink),
         urlEl = $("#urls"),
-        timetableURL = $("#timetable-url").on("change keyup", updateLink2),
-        selectCalendarLink = $("#select-calendar-link"),
-        urlCalendarLink = $("#url-calendar-link");
+        urlCalendarInput = $("#timetable-url").on("change keyup", updateURLLink),
+        calendarLink = $("#calendar-link");
 
       // populate departments first
       // they will always be populated so we won't have to change them around again
@@ -176,7 +149,13 @@
       }
 
       updateItems();
-      updateLink2();
+
+    $('#tab-headers a').click(function (e) {
+      e.preventDefault();
+      $(this).tab('show');
+    })
+
+
     })();
   </script>
 </body>
