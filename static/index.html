@@ -9,6 +9,11 @@
 </head>
 <body>
   <div class="content">
+
+    <a href="https://github.com/danielconnor/itcarlow-ical">
+      <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub">
+    </a>
+
     <h1>iCalendar exporter</h1>
     <p>
       This service allows you to convert IT Carlow timetables to the iCalendar format.
@@ -25,6 +30,9 @@
         <div>
           <label class="radio">
             <input name="type" type="radio" value="courses" checked="checked"> Students
+          </label>
+          <label class="radio">
+            <input name="type" type="radio" value="rooms"> Rooms
           </label>
           <label class="radio">
             <input name="type" type="radio" value="staff"> Staff
@@ -44,7 +52,7 @@
         <div>
           <ol>
             <li>
-          Copy this link: <div class="input-prepend"><label for="calendar-link" class="add-on">iCalendar link: </label><input type="text" class="span5" id="calendar-link"></div>
+              Copy this link: <div class="input-prepend"><label for="calendar-link" class="add-on">iCalendar link: </label><input type="text" class="span5" id="calendar-link"></div>
             </li>
             <li>
               Go to <a href="https://www.google.com/calendar/" target="_blank">Google Calendar</a> and sign in using the account you use on your smartphone if you are not logged in already.
@@ -161,12 +169,6 @@
       }
 
       updateItems();
-
-    $('#tab-headers a').click(function (e) {
-      e.preventDefault();
-      $(this).tab('show');
-    })
-
 
     })();
   </script>

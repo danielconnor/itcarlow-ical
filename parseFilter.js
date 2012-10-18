@@ -1,3 +1,8 @@
+var allowedStaff = [
+  "MEUDEC, CHRIS"
+];
+
+
 require("fs").readFile("./filter.js", function(err, data) {
   var regex = /(\w+)array\[(\d+)\] \[(\d+)\] = \"(.+?)\"/g,
     match,
@@ -14,7 +19,8 @@ require("fs").readFile("./filter.js", function(err, data) {
       name: name,
       id: id,
       courses: [],
-      staff: []
+      staff: [],
+      rooms: []
     };
     depts.push(d);
   }
@@ -52,6 +58,11 @@ require("fs").readFile("./filter.js", function(err, data) {
       id = next()[4],
       dept = deptObj[deptID];
 
+    // only allow staff who want to be added
+    if(allowedStaff.indexOf(name) === -1) {
+      return;
+    }
+
     var staffMember = {
       name: name,
       id: id
@@ -65,6 +76,24 @@ require("fs").readFile("./filter.js", function(err, data) {
 
   }
 
+  function parseRoom() {
+    var name = match[4],
+      deptID = next()[4],
+      id = next()[4],
+      dept = deptObj[deptID];
+
+    var room = {
+      name: name,
+      id: id
+    };
+
+    rooms.push(room);
+    roomObj[id] = room;
+    if(dept) {
+      dept.rooms.push(room);
+    }
+  }
+
   var depts = [],
     deptObj = {},
     modules = [],
@@ -72,7 +101,9 @@ require("fs").readFile("./filter.js", function(err, data) {
     courses = [],
     coursesObj = {},
     staff = [],
-    staffObj = [];
+    staffObj = [],
+    rooms = [],
+    roomObj = {};
 
   while((match = next()) !== null) {
     var type = match[1],
@@ -96,6 +127,7 @@ require("fs").readFile("./filter.js", function(err, data) {
       case "room":
         break;
       case "roombydept":
+        parseRoom();
         break;
       case "prog":
         break;
@@ -114,6 +146,7 @@ require("fs").readFile("./filter.js", function(err, data) {
 
     dept.staff.sort(itemSorter);
     dept.courses.sort(itemSorter);
+    dept.rooms.sort(itemSorter);
   }
 
   console.log("var depts = " + JSON.stringify(deptObj) + ";");

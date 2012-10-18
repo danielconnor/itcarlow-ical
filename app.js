@@ -23,8 +23,21 @@ app.get("/timetable.:format", function(req, res) {
     url = query.url;
   }
   else if(query.type && query.item) {
-    var type = query.type === "staff" ? "staff" : "student+set";
-    url = "http://timetable.itcarlow.ie/reporting/textspreadsheet;" + type + ";id;" + query.item + "?days=1-5&periods=5-40&template=" + type + "+textspreadsheet";
+    var type, template;
+    switch(query.type) {
+      case "staff":
+        template = type = staff;
+        break;
+      case "rooms":
+        type = "locations";
+        template = "location";
+        break;
+      default:
+      case "courses":
+        template = type = "student+set";
+        break;
+    }
+    url = "http://timetable.itcarlow.ie/reporting/textspreadsheet;" + type + ";id;" + query.item + "?days=1-5&periods=5-40&template=" + template + "+textspreadsheet";
   }
   else {
     return res.send("oops");
@@ -40,9 +53,9 @@ app.get("/timetable.:format", function(req, res) {
       case "json":
         res.json(timetable);
         break;
+      default:
       case "ics":
       case "ical":
-      default:
         res.setHeader('Content-Type', 'text/calendar');
         res.send(timetable.toICAL().toString());
         break;
